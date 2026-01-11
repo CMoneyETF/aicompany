@@ -754,37 +754,80 @@
 
         // 2. Profit Chart
         const profitData = PROFITABILITY_DATA[selectedCompany.ticker] || [];
-        if(profitData.length > 0) {
-            const profitOptions = {
-                series: [
-                    { name: 'EPS', type: 'column', data: profitData.map(d => d.eps) },
-                    { name: '毛利率', type: 'line', data: profitData.map(d => d.grossMargin) },
-                    { name: '淨利率', type: 'line', data: profitData.map(d => d.netMargin) }
-                ],
-                legend: {show: false    },
-                chart: { 
-                    height: 300, 
-                    type: 'line', 
-                    toolbar: { show: false },
-                    fontFamily: 'JetBrains Mono, monospace',
-                    background: 'transparent'
+if(profitData.length > 0) {
+    const profitOptions = {
+        series: [
+            { name: 'EPS', type: 'column', data: profitData.map(d => d.eps) },
+            { name: '毛利率', type: 'line', data: profitData.map(d => d.grossMargin) },
+            { name: '淨利率', type: 'line', data: profitData.map(d => d.netMargin) }
+        ],
+        legend: {show: false},
+        chart: { 
+            height: 300, 
+            type: 'line', 
+            toolbar: { show: false },
+            fontFamily: 'JetBrains Mono, monospace',
+            background: 'transparent'
+        },
+        stroke: { width: [0, 2, 2] },
+        colors: ['#8b5cf6', '#fbbf24', '#22d3ee'],
+        labels: profitData.map(d => d.quarter),
+        yaxis: [
+            { 
+                labels: { 
+                    style: { colors: '#94a3b8' },
+                    offsetX: -5
+                } 
+            },
+            { 
+                opposite: true, 
+                labels: { 
+                    style: { colors: '#94a3b8' },
+                    offsetX: -10
+                } 
+            }
+        ],
+        xaxis: { 
+            labels: { style: { colors: '#94a3b8', fontSize: '10px' } },
+            axisBorder: { show: false },
+            axisTicks: { show: false }
+        },
+        grid: { 
+            borderColor: 'rgba(255,255,255,0.05)',
+            padding: {
+                right: 10,
+                left: 5
+            }
+        },
+        tooltip: { theme: 'dark' },
+        plotOptions: { bar: { borderRadius: 4, columnWidth: '40%' } },
+        responsive: [{
+            breakpoint: 768,
+            options: {
+                grid: {
+                    padding: {
+                        right: 5,
+                        left: 0
+                    }
                 },
-                stroke: { width: [0, 2, 2] },
-                colors: ['#8b5cf6', '#fbbf24', '#22d3ee'],
-                labels: profitData.map(d => d.quarter),
                 yaxis: [
-                    { labels: { style: { colors: '#94a3b8' } } },
-                    { opposite: true, labels: { style: { colors: '#94a3b8' } } }
-                ],
-                xaxis: { 
-                    labels: { style: { colors: '#94a3b8', fontSize: '10px' } },
-                    axisBorder: { show: false },
-                    axisTicks: { show: false }
-                },
-                grid: { borderColor: 'rgba(255,255,255,0.05)' },
-                tooltip: { theme: 'dark' },
-                plotOptions: { bar: { borderRadius: 4, columnWidth: '40%' } }
-            };
+                    { 
+                        labels: { 
+                            style: { colors: '#94a3b8', fontSize: '9px' },
+                            offsetX: -8
+                        } 
+                    },
+                    { 
+                        opposite: true, 
+                        labels: { 
+                            style: { colors: '#94a3b8', fontSize: '9px' },
+                            offsetX: -15
+                        } 
+                    }
+                ]
+            }
+        }]
+    };
             profitChart = new ApexCharts(document.querySelector("#profit-chart-container"), profitOptions);
             profitChart.render();
         } else {
