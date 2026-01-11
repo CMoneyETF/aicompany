@@ -68,6 +68,11 @@
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         .custom-scrollbar { overflow-y: auto; }
+      
+      /* 防止圖表縮放 */
+        #profit-chart-container {
+            touch-action: manipulation;
+          -ms-touch-action: manipulation;}
     </style>
 <script type="importmap">
 {
@@ -767,7 +772,13 @@ if(profitData.length > 0) {
             type: 'line', 
             toolbar: { show: false },
             fontFamily: 'JetBrains Mono, monospace',
-            background: 'transparent'
+            background: 'transparent',
+            zoom: {
+                enabled: false
+            },
+            selection: {
+                enabled: false
+            }
         },
         stroke: { width: [0, 2, 2] },
         colors: ['#8b5cf6', '#fbbf24', '#22d3ee'],
