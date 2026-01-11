@@ -270,6 +270,10 @@
                                         <div class="w-2 h-0.5 lg:w-3 lg:h-1 bg-amber-400 rounded-full"></div>
                                         <span class="text-xs lg:text-sm">毛利率</span>
                                     </div>
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-2 h-0.5 lg:w-3 lg:h-1 bg-amber-400 rounded-full"></div>
+                                        <span class="text-xs lg:text-sm">淨利率</span>
+                                    </div>
                                 </div>
                             </div>
                             <div id="profit-chart-container" class="w-full h-[250px] lg:h-[300px]"></div>
@@ -750,9 +754,6 @@
         if(profitData.length > 0) {
             const profitOptions = {
                 series: [
-                    { name: 'EPS', type: 'column', data: profitData.map(d => d.eps) },
-                    { name: '毛利率', type: 'line', data: profitData.map(d => d.grossMargin) },
-                    { name: '淨利率', type: 'line', data: profitData.map(d => d.netMargin) }
                 ],
                 chart: { 
                     height: 300, 
