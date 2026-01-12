@@ -701,23 +701,28 @@
 
     // --- 6. AD POPUP LOGIC ---
     window.addEventListener('click', () => {
-        clickCount++;
-        // Trigger on 5th click as per original spec
-        if(clickCount === 5) {
-            document.getElementById('ad-popup').classList.remove('hidden');
-        }
-    });
-
-    function closeAd(e) {
-        if(e) e.stopPropagation();
-        document.getElementById('ad-popup').classList.add('hidden');
+    clickCount++;
+    // Trigger on 5th click as per original spec
+    if(clickCount === 5) {
+        document.getElementById('ad-popup').classList.remove('hidden');
     }
+});
 
-    document.getElementById('close-ad-btn').addEventListener('click', closeAd);
-    document.getElementById('ad-popup').addEventListener('click', (e) => {
-        if(e.target.id === 'ad-popup') closeAd(e);
-    });
-    document.getElementById('ad-link').addEventListener('click', closeAd);
+function closeAd(e) {
+    if(e) e.stopPropagation();
+    document.getElementById('ad-popup').classList.add('hidden');
+}
+
+// 只保留關閉按鈕的事件
+document.getElementById('close-ad-btn').addEventListener('click', closeAd);
+
+// ❌ 移除或註解這段 - 這是導致點擊外部關閉彈窗的代碼
+// document.getElementById('ad-popup').addEventListener('click', (e) => {
+//     if(e.target.id === 'ad-popup') closeAd(e);
+// });
+
+// 點擊廣告連結時關閉彈窗（保留此功能，因為用戶點擊廣告後應該關閉）
+document.getElementById('ad-link').addEventListener('click', closeAd);
 
     // --- 7. CHARTS (ApexCharts) ---
 
