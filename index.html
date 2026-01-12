@@ -702,8 +702,8 @@
     // --- 6. AD POPUP LOGIC ---
     window.addEventListener('click', () => {
     clickCount++;
-    // Trigger on 5th click as per original spec
-    if(clickCount === 5) {
+    // Trigger on 10th click as per original spec
+    if(clickCount === 10) {
         document.getElementById('ad-popup').classList.remove('hidden');
     }
 });
